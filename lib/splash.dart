@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tllevo_driver/Pages/Home/home.dart';
 import 'Const/const.dart';
 import 'Pages/Inicio/welcome.dart';
 
@@ -12,10 +14,19 @@ class InitSplash extends StatefulWidget {
 
 class _InitSplashState extends State<InitSplash> {
 
+  late bool isLogin;
+
+getBoolValuesSF() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return bool
+  isLogin = prefs.getBool('isLogin') ?? false;
+  return isLogin;
+}
 
   @override
   void initState() {
     super.initState();
+    getBoolValuesSF();
     Future.delayed(const Duration(milliseconds: 3000),
         () => Navigator.push(context, _crearRuta()));
   }
@@ -24,6 +35,7 @@ class _InitSplashState extends State<InitSplash> {
     return PageRouteBuilder(
         pageBuilder: (BuildContext context, Animation<double> animation,
                 Animation<double> secondaryAnimation) => 
+           isLogin ? Home(show: false) :
             const Welcome(),
         transitionDuration: const Duration(seconds: 1),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {

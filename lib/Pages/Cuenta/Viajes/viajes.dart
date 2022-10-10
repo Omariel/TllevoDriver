@@ -3,8 +3,8 @@ import 'package:tllevo_driver/Const/const.dart';
 import 'package:tllevo_driver/Pages/Cuenta/Viajes/detalle.dart';
 
 class Viajes extends StatelessWidget {
-  const Viajes({Key? key}) : super(key: key);
-
+  Viajes({Key? key, required this.data}) : super(key: key);
+Map data;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -64,7 +64,7 @@ class Viajes extends StatelessWidget {
           left: size.width * 0.1,
           right: size.width * 0.1),
       child: GestureDetector(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>Detalle(date: date, code: code, img: 'Assets/Images/mapDetalle.png', price: price))),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>Detalle(data: data,date: date, code: code, img: 'Assets/Images/mapDetalle.png', price: price))),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

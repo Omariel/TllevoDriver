@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tllevo_driver/Api/api_login.dart';
 
 import '../../../Const/const.dart';
 import '../../../Widget/button.dart';
@@ -74,7 +75,7 @@ class _RecuperarPasswordState extends State<RecuperarPassword> {
             child: Column(
               children: [
                 SizedBox(
-                  height: size.height*0.099,
+                  height: size.height * 0.099,
                   width: size.width * 0.8,
                   child: TextFormField(
                     controller: controllerPassword,
@@ -118,12 +119,13 @@ class _RecuperarPasswordState extends State<RecuperarPassword> {
                   height: size.height * 0.02,
                 ),
                 SizedBox(
-                  height: size.height*0.099,
+                  height: size.height * 0.099,
                   width: size.width * 0.8,
                   child: TextFormField(
                     controller: controllerPasswordConfirm,
                     validator: (value) {
-                      if(controllerPassword.text != controllerPasswordConfirm.text){
+                      if (controllerPassword.text !=
+                          controllerPasswordConfirm.text) {
                         return 'Las contraseñas no coinciden';
                       } else {
                         return null;
@@ -162,21 +164,21 @@ class _RecuperarPasswordState extends State<RecuperarPassword> {
                   height: size.height * 0.11,
                 ),
                 SizedBox(
-              height: size.height * 0.06,
-              width: size.width * 0.8,
-              child: Button(
-                callback: () {
-                  if (keyForm.currentState!.validate()) {
-                   
-
-                    }
-                },
-                height: 0.025,
-                text: 'Siguiente',
-                size: size,
-                color: Const().black,
-                colorTxt: Colors.white,
-              )),
+                    height: size.height * 0.06,
+                    width: size.width * 0.8,
+                    child: Button(
+                      callback: () {
+                        if (keyForm.currentState!.validate()) {
+                          Api().resetPassword(widget.id,
+                              controllerPasswordConfirm.text, context);
+                        }
+                      },
+                      height: 0.025,
+                      text: 'Siguiente',
+                      size: size,
+                      color: Const().black,
+                      colorTxt: Colors.white,
+                    )),
               ],
             ),
           ),

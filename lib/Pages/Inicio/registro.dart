@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:tllevo_driver/Api/api_login.dart';
+import 'package:tllevo_driver/Pages/Inicio/Login/login.dart';
 import 'package:tllevo_driver/Pages/Inicio/term&cond.dart';
 import 'package:tllevo_driver/Widget/button.dart';
 import '../../Const/const.dart';
@@ -76,7 +78,7 @@ class _RegistroState extends State<Registro> {
                       controller: controllerName,
                       cursorColor: Colors.black,
                       validator: (value) {
-                        String pattern = r'(^[a-zA-Z ]*$)';
+                        String pattern = r'(^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$)';
                         RegExp regExp = RegExp(pattern);
                         if (value!.isEmpty) {
                           return "El nombre es necesario";
@@ -213,15 +215,19 @@ class _RegistroState extends State<Registro> {
                     height: size.height * 0.03,
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(right: size.width*0.3),
-                    child: Text(
-                      '¿Ya tienes una cuenta?',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontSize: size.height * 0.021,
-                          color: Colors.black,
-                          fontFamily: 'Poppins',
-                          height: 0),
+                    padding: EdgeInsets.only(right: size.width * 0.3),
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(context, 
+                      MaterialPageRoute(builder: (context) => Login())),
+                      child: Text(
+                        '¿Ya tienes una cuenta?',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: size.height * 0.021,
+                            color: Colors.black,
+                            fontFamily: 'Poppins',
+                            height: 0),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -233,7 +239,12 @@ class _RegistroState extends State<Registro> {
                       child: Button(
                         callback: () {
                           if (keyForm.currentState!.validate()) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>TermCond(login: true)));
+                            Api().signUp(
+                                controllerName.text,
+                                controllerEmail.text,
+                                controllerPassword.text,
+                                number.phoneNumber.toString(),
+                                context);
                           }
                         },
                         height: 0.025,

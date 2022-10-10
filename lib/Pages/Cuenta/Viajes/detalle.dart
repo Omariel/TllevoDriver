@@ -6,12 +6,14 @@ import 'package:tllevo_driver/Widget/button.dart';
 
 class Detalle extends StatelessWidget {
   String date, price, code, img;
+  Map data;
   Detalle(
       {Key? key,
       required this.date,
       required this.code,
       required this.img,
-      required this.price})
+      required this.price,
+      required this.data})
       : super(key: key);
 
   @override
@@ -208,7 +210,7 @@ class Detalle extends StatelessWidget {
           Positioned(
             top: size.height*0.88,
             child: GestureDetector(
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> const SoporteChat())),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> SoporteChat(myEmail: data['email'],))),
               child: Text(
                 'Soporte',
                 style: TextStyle(

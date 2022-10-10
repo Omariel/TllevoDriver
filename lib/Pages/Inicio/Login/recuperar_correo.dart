@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tllevo_driver/Api/api_login.dart';
 import 'package:tllevo_driver/Pages/Inicio/Login/recuperar_password.dart';
 
 import '../../../Const/const.dart';
@@ -113,7 +114,7 @@ class _RecuperarCorreoState extends State<RecuperarCorreo> {
               child: Button(
                 callback: () {
                   if (keyForm.currentState!.validate()) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RecuperarPassword(id: '')));
+                   Api().forgotPassword(controllerEmail.text, '', '', true, context);
 
                     }
                 },

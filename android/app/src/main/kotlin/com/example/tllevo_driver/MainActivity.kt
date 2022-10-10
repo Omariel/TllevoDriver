@@ -1,4 +1,4 @@
-package com.example.tllevo_driver
+package com.tllevo.driver
 
 import io.flutter.embedding.android.FlutterActivity
 

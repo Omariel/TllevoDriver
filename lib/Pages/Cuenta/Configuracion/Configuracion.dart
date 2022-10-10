@@ -4,11 +4,14 @@ import 'package:tllevo_driver/Const/const.dart';
 import 'package:tllevo_driver/Widget/button.dart';
 
 class Configuracion extends StatelessWidget {
-  const Configuracion ({Key? key}) : super(key: key);
-
+  Configuracion ({Key? key, required this.myData}) : super(key: key);
+  Map myData;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    List names = myData['name'].split(' ');
+    String name1 = names[0] ?? myData['name'];
+    String name2 = names[1] ?? '';
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.zero,
@@ -65,7 +68,7 @@ class Configuracion extends StatelessWidget {
                 child:  Padding(
                   padding:  EdgeInsets.only(left:size.width*0.06, top: size.height*0.01),
                   child: Text(
-                      'Ricardo',
+                      name1,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: size.height * 0.019,
@@ -85,7 +88,7 @@ class Configuracion extends StatelessWidget {
                 child:  Padding(
                   padding:  EdgeInsets.only(left:size.width*0.06, top: size.height*0.01),
                   child: Text(
-                      'López',
+                      name2,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: size.height * 0.019,
@@ -105,7 +108,7 @@ class Configuracion extends StatelessWidget {
                 child:  Padding(
                   padding:  EdgeInsets.only(left:size.width*0.06, top: size.height*0.01),
                   child: Text(
-                      'Ricardo.manzano@tllevo.com',
+                      myData['email'],
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: size.height * 0.019,
@@ -125,7 +128,7 @@ class Configuracion extends StatelessWidget {
                 child:  Padding(
                   padding:  EdgeInsets.only(left:size.width*0.06, top: size.height*0.01),
                   child: Text(
-                      '+1 011 535-0353',
+                      myData['phone'],
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: size.height * 0.019,
